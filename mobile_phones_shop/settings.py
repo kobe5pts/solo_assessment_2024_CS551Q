@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-#!^=1*owa%fe&cncq04hirm+q864v0z%g^z5y8!4il+qyt=5@m
 DEBUG = True
 
 ALLOWED_HOSTS = ['samuelsalami-falconside-8000.codio-box.uk/', 'avalonaccent-ovalagenda-8000.codio-box.uk', 'localhost','*']
+CSRF_TRUSTED_ORIGINS =  ['https://scharlau.pythonanywhere.com', 'https://samuelsalami-falconside-8000.codio-box.uk', 'https://avalonaccent-ovalagenda-8000.codio-box.uk']
 
 
 # Application definition
@@ -37,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'category',
+    'useraccounts',
+    'products_shop',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +73,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mobile_phones_shop.wsgi.application'
 
+AUTH_USER_MODEL = 'useraccounts.UserProfile'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -120,6 +125,10 @@ STATIC_ROOT = BASE_DIR /'static'
 STATICFILES_DIRS = [
     'mobile_phones_shop/static',
 ]
+
+# media files configuration
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR /'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
