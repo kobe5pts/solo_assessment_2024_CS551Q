@@ -10,12 +10,14 @@ class Product(models.Model):
     product_description = models.TextField(blank=True)
     image_url = models.URLField()
     slug = models.SlugField(max_length=255, unique=True, blank=True)
+    stock = models.IntegerField(default=1)  # default set to 1, since each product has only one item on the CSV file 
     in_stock = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
+    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
-
+    modified_date = models.DateTimeField(auto_now=True)
+    
     class Meta:
         ordering = ('-created',)
 
