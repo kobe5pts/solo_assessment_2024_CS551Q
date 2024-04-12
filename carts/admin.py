@@ -3,9 +3,11 @@ from . models import Cart, CartItem
 
 # Register your models here.
 
-# class ProductAdmin(admin.ModelAdmin):
-#     prepopulated_fields = {'slug': ('product_name',)}
-#     list_display = ('product_name', 'price', 'stock', 'in_stock','is_active', 'category', 'modified_date')
+class CartAdmin(admin.ModelAdmin):
+    list_display = ('cart_id', 'date_added')
 
-admin.site.register(Cart)
-admin.site.register(CartItem)
+class CartItemAdmin(admin.ModelAdmin):
+    list_display = ('product', 'cart', 'quantity', 'is_active')
+
+admin.site.register(Cart, CartAdmin)
+admin.site.register(CartItem, CartItemAdmin)

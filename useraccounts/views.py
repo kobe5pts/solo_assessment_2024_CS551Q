@@ -3,6 +3,12 @@ from .forms import RegistrationForm
 from .models import UserProfile
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
+from carts.models import Cart, CartItem
+from carts.views import _cart_id
+from django.contrib.auth import authenticate
+import requests
+from orders.models import Order
+
 
 # Create your views here.
 
@@ -28,19 +34,40 @@ def register(request):
     }
     return render(request, 'useraccounts/register.html', context)
 
+
 def login(request):
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
 
-        user = auth.authenticate(email=email, password=password)
+        user = authenticate(email=email, password=password)
 
         if user is not None:
+            try:
+                cart = Cart.objects.get(cart_id=_cart_id(request))
+                is_cart_item_exists = CartItem.objects.filter(cart=cart).exists()
+                if is_cart_item_exists:
+                    cart_items = CartItem.objects.filter(cart=cart)
+                    for item in cart_items:
+                        item.user = user
+                        item.save()
+            except:
+                pass
+            
             auth.login(request, user)
-            return redirect('dashboard')
+            messages.success(request, 'You are now logged in.')
+            url = request.META.get('HTTP_REFERER')
+            try:
+                query = requests.utils.urlparse(url).query
+                params = dict(x.split('=') for x in query.split('&'))
+                if 'next' in params:
+                    nextPage = params['next']
+                    return redirect(nextPage)
+            except:
+                return redirect('dashboard')
         else:
             messages.error(request, 'Invalid login credentials')
-            return redirect('login')    
+            return redirect('login')
 
     return render(request, 'useraccounts/login.html')
 
@@ -52,4 +79,9 @@ def logout(request):
 
 @login_required(login_url = 'login')
 def dashboard(request):
-    return render(request, 'useraccounts/dashboard.html')    
+    orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
+    orders_count = orders.count()
+    context = {
+       'orders_count' : orders_count, 
+    }
+    return render(request, 'useraccounts/dashboard.html', context)    

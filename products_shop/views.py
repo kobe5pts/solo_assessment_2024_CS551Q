@@ -47,36 +47,6 @@ def product_detail(request, category_slug, product_slug):
     }  
     return render(request, 'store/product_detail.html', context)
 
-# def search(request):
-#     if 'keyword' in request.GET:
-#         # keyword = request.GET['keyword']
-#         keyword = request.GET.get('keyword', default_value_if_not_present)
-#         if 'keyword':
-#             products = Product.objects.order_by.('-created').filter(product_description__icontains='keyword')
-#     context = {
-#         'products' : products,
-#     }
-
-#     return render(request, 'store/store.html', context)
-
-# def search(request):
-#     products = None
-#     product_count = 0
-#     paged_products = 0
-#     keyword = request.GET.get('keyword', '').strip()  # Provide an empty string as default value, get the keyword and remove leading/trailing whitespace
-#     if keyword:  # Check if keyword is not empty
-#         products = Product.objects.order_by('-created').filter(Q(product_description__icontains=keyword) | Q(product_name__icontains=keyword))
-
-#         paginator = Paginator(products, 50)  # Define the number of items per page
-#         page_number = request.GET.get('page')
-#         paged_products = paginator.get_page(page_number)
-
-#         product_count = products.count()
-#     context = {
-#         'products': paged_products,
-#         'product_count' : product_count,
-#     }
-#     return render(request, 'store/store.html', context)
 
 def search(request):
     # Get the keyword from the request
