@@ -20,7 +20,7 @@
 		<li><a href="#" class="nav-link"> <i class="fa fa-envelope"></i> Email </a></li>
 		<li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Call us </a></li>
 	</ul> <!-- list-inline //  -->
-  </div> <!-- navbar-collapse .// -->
+</div> <!-- navbar-collapse .// -->
 </div> <!-- container //  -->
 </nav>
 
@@ -29,7 +29,15 @@
 <div class="row align-items-center">
 	<div class="col-lg-2 col-md-3 col-6">
 		<a href="{% url 'home' %}" class="brand-wrap">
-			<img class="logo" src="{% static './images/logo.png' %}">
+			<style>
+				.rounded-logo {
+					border-radius: 5px; /* Adjust the value to change the roundness */
+					width: 85px; /* Adjust the width as needed */
+        			height: auto; /* Maintain aspect ratio */
+				}
+			</style>
+			<img class="logo rounded-logo" src="{% static './images/logo1.png' %}">
+            <p class="text">Home Page</p>
 		</a> <!-- brand-wrap.// -->
 	</div>
 	<div class="col-lg col-sm col-md col-6 flex-grow-0">
@@ -52,7 +60,7 @@
 			    <input type="text" class="form-control" style="width:60%;" placeholder="Search" name="keyword">
 			    
 			    <div class="input-group-append">
-			      <button class="btn btn-primary" type="submit">
+			      <button class="btn btn-primary" name="submit" "submit">
 			        <i class="fa fa-search"></i>
 			      </button>
 			    </div>

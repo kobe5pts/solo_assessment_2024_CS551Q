@@ -34,7 +34,7 @@
 		<div class="filter-content collapse show" id="collapse_1" style="">
 			<div class="card-body">
 				
-				<ul class="list-menu" style="max-height: 200px; overflow-y: auto;">
+				<ul class="list-menu" style="max-height: 300px; overflow-y: auto;">
 					<li><a href="{% url 'store' %}">All products</a></li>
 					{% for category in links %}
 						<li><a href="{{category.get_url}}">{{category.cat_name}}</a></li>
@@ -51,45 +51,23 @@
 	
 	<article class="filter-group">
 		<header class="card-header">
-			<a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
-				<i class="icon-control fa fa-chevron-down"></i>
-				<h6 class="title">Price range </h6>
-			</a>
+			
 		</header>
 		<div class="filter-content collapse show" id="collapse_3" style="">
 			<div class="card-body">
 				
 				<div class="form-row">
 				<div class="form-group col-md-6">
-				  <label>Min</label>
-				  <!-- <input class="form-control" placeholder="$0" type="number"> -->
-				  	<select class="mr-2 form-control">
-						<option value="0">$0</option>
-						<option value="50">$50</option>
-						<option value="100">$100</option>
-						<option value="150">$150</option>
-						<option value="200">$200</option>
-						<option value="500">$500</option>
-						<option value="1000">$1000</option>
-					</select>
+				  
 				</div>
 				<div class="form-group text-right col-md-6">
-				  <label>Max</label>
-				  	<select class="mr-2 form-control">
-						<option value="50">$50</option>
-						<option value="100">$100</option>
-						<option value="150">$150</option>
-						<option value="200">$200</option>
-						<option value="500">$500</option>
-						<option value="1000">$1000</option>
-						<option value="2000">$2000+</option>
-					</select>
+				 
 				</div>
 				</div> <!-- form-row.// -->
-				<button class="btn btn-block btn-primary">Apply</button>
+				<!-- <button class="btn btn-block btn-primary">Apply</button> -->
 			</div><!-- card-body.// -->
 		</div>
-	</article> <!-- filter-group .// -->
+	</article> <!-- filter-group .//
 	
 </div> <!-- card.// -->
 
@@ -119,11 +97,8 @@
 								<span class="price">£{{ product.price }}</span>
 							</div> <!-- price-wrap.// -->
 						</div>
-						<!-- {% if product.stock <= 0 %}
-							<h5 class="text-danger">Out of Stock</h5>
-						{% else %}	 -->
 							<a href="{{ product.get_product_url }}" class="btn btn-block btn-primary">View Product Details </a>	
-						<!-- {% endif %}	 -->
+						
 					</figcaption>
 				</figure>
 			</div> <!-- col.// -->

@@ -68,7 +68,7 @@ body {
   line-height: 1.5;
   color: #343a40;
   text-align: left;
-  background-color: #fff;
+  background-color: #e4e4e4;
 }
 
 [tabindex="-1"]:focus {
@@ -4348,7 +4348,7 @@ input[type=button].btn-block {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: #d5e70da0;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 0.37rem;
