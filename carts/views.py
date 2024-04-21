@@ -6,13 +6,14 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+# Function to retrieve or create a cart ID for the session
 def _cart_id(request):
     cart = request.session.session_key
     if not cart:
         cart = request.session.create()
     return cart 
 
-
+# View for adding a product to the cart
 def add_cart(request, product_id):
     current_user = request.user
     product = Product.objects.get(id=product_id)
@@ -40,7 +41,7 @@ def add_cart(request, product_id):
 
     return redirect('cart')
 
-
+# View for decrementing the quantity of a product in the cart
 def decrement_cart(request, product_id, cart_item_id=None):
     if cart_item_id:
         cart_item = get_object_or_404(CartItem, id=cart_item_id)
@@ -58,7 +59,7 @@ def decrement_cart(request, product_id, cart_item_id=None):
         cart_item.delete()
     return redirect('cart')    
 
-
+# View for removing a specific item from the cart
 def remove_cart_item(request, product_id, cart_item_id):
     product = get_object_or_404(Product, id=product_id)
     if request.user.is_authenticated:
@@ -69,7 +70,7 @@ def remove_cart_item(request, product_id, cart_item_id):
     cart_item.delete()
     return redirect('cart')
 
-
+# View for displaying the cart
 def cart(request, total=0, quantity=0, cart_items=None):
     try:
         tax = 0
@@ -97,7 +98,7 @@ def cart(request, total=0, quantity=0, cart_items=None):
     }
     return render(request, 'store/cart.html', context)
 
-
+# View for the checkout page
 @login_required(login_url='login')
 def checkout(request, total=0, quantity=0, cart_items=None):
     try:

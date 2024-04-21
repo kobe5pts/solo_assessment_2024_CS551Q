@@ -18,9 +18,11 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True)
     modified_date = models.DateTimeField(auto_now=True)
     
+    # Define Meta class to specify ordering
     class Meta:
         ordering = ('-created',)
 
+    # Define save method to generate unique slug
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = orig = slugify(self.product_name)[:255]  # Limit the length to 255 characters
@@ -31,8 +33,10 @@ class Product(models.Model):
                 self.slug = "%s-%d" % (orig[:(len(orig)-len(str(x))-1)], x)
         super().save(*args, **kwargs)
 
+    # Define method to get product URL
     def get_product_url(self):
         return reverse('product_detail', args=[self.category.slug, self.slug])
 
+    # Define string representation of the Product model
     def __str__(self):
         return self.product_name

@@ -9,13 +9,18 @@ from django.contrib.auth import authenticate
 import requests
 from orders.models import Order
 
-
 # Create your views here.
 
+# Views for user account functionality
+
 def register(request):
+    """
+    View for user registration.
+    """
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
+            # If form is valid, create a new user
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
@@ -36,6 +41,9 @@ def register(request):
 
 
 def login(request):
+    """
+    View for user login.
+    """
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -44,6 +52,7 @@ def login(request):
 
         if user is not None:
             try:
+                # Transfer cart items to user after login
                 cart = Cart.objects.get(cart_id=_cart_id(request))
                 is_cart_item_exists = CartItem.objects.filter(cart=cart).exists()
                 if is_cart_item_exists:
@@ -58,6 +67,7 @@ def login(request):
             messages.success(request, 'You are now logged in.')
             url = request.META.get('HTTP_REFERER')
             try:
+                # Redirect to previous page after login
                 query = requests.utils.urlparse(url).query
                 params = dict(x.split('=') for x in query.split('&'))
                 if 'next' in params:
@@ -73,12 +83,18 @@ def login(request):
 
 @login_required(login_url = 'login')
 def logout(request):
+    """
+    View for user logout.
+    """
     auth.logout(request)
     messages.success(request, 'You are logged out.')
     return redirect('login')
 
 @login_required(login_url = 'login')
 def dashboard(request):
+    """
+    View for user dashboard.
+    """
     orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
     orders_count = orders.count()
     context = {
