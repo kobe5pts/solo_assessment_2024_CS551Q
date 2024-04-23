@@ -8,7 +8,7 @@ class AccountManager(BaseUserManager):
     """
     Custom user manager for managing user creation and superuser creation.
     """
-    def create_user(self, first_name, last_name, username, email, password=None):
+    def create_user(self, first_name, last_name, username, email, phone_number, address, password=None):
         """
         Method to create a regular user.
         """
@@ -26,6 +26,8 @@ class AccountManager(BaseUserManager):
             username = username,
             first_name = first_name,
             last_name = last_name,
+            phone_number = phone_number,
+            address = address,
         )
 
         # Set password and save the user

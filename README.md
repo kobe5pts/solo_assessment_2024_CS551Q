@@ -35,13 +35,17 @@ The application is deployed on PythonAnyWhere at this site:  <https://vidago666.
          ```
    5. Launch the application at this address:    https://samuelsalami-falconside-8000.codio-box.uk/
 
-   Creating Superuser
+## Creating Superuser
    You can create an admin user to monitor the customers and orders made in the shop. 
    There is also a dashboard that monitors the orders made by the customers. You can also add more admins or customers. 
-   Run this command:
+   Run this command in your terminal:
 ```bash
    python3 manage.py createsuperuser
 ```
+   Launch the admin application at this address:    https://samuelsalami-falconside-8000.codio-box.uk/admin
+## Creating a user
+   You create a user by signing up using the [Register](https://samuelsalami-falconside-8000.codio-box.uk/useraccounts/register/) button, however, such user would have to be activated by the superuser in the
+   admin dashboard for now. Authentication for new user was not implemented in this project.
 ### Program Structure
 The program is composed of six Django applications: mobile_phones_shop for site basic settings, carts, category, orders, products_shop, and useraccounts applications for the website's detailed content.
 
