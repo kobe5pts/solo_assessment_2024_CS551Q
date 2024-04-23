@@ -7,7 +7,7 @@ simplifying the process of purchasing mobile phones. The goal is to provide user
 platform where they can effortlessly browse, search for, and order mobile phones. Leveraging open-source data 
 from [Kaggle](https://www.kaggle.com/datasets), users have access to a wide range of mobile phone information, including specifications, 
 prices, and availability.
-The application is deployed on PythonAnyWhere at this site:  <https://vidago666.pythonanywhere.com>
+The application is deployed on PythonAnyWhere at this site:  <https://samamao.pythonanywhere.com/>
 
 ### Installation Steps
    1. Clone or download the repository as follows:
@@ -89,7 +89,3 @@ behave #make sure you are now on solo_assessment_2024_CS551Q/
 ```
 * You will see the BDD test, albeit with a "failing scenarios at tests/features/purchase.feature:3  
 Add product to cart and proceed to checkout", for now of which I have not been able to fully implement.
-
-
-## License
-CSRF_TRUSTED_ORIGINS =  [https://scharlau.pythonanywhere.com]
