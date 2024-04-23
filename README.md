@@ -51,7 +51,7 @@ The program is composed of six Django applications: mobile_phones_shop for site 
 
 **mobile_phones_shop Folder**: Contains basic site settings.
 
-**static Folder**: Contains all the custom Bootstrap css files, which are referenced in other HTML files.
+**static Folder**: Contains all the custom Bootstrap css files, which are referenced in other HTML files, as well as picture files for banner, modupeLogo and favicon.
 
 **tests Folder**: Contains all BDD test files and test environment configuration files. 
 
