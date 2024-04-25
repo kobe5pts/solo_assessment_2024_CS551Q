@@ -5,53 +5,89 @@
 <section class="section-conten padding-y bg">
 
 <div class="container">
-	<div class="row">
-	<aside class="col-md-3">
-		<!--   SIDEBAR   -->
-		<ul class="list-group">
-			<a class="list-group-item active" href="#"> Dashboard </a>
-			<a class="list-group-item" href="#"> My Order </a>
-		</ul>
-		<br>
-		<a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> 
-		<!--   SIDEBAR .//END   -->
-	</aside>
-	<main class="col-md-9">
-		<article class="card">
-			<header class="card-header">
-				<strong class="d-inline-block mr-3">Logged in as:</strong>
-				<span>{{ user.first_name }}</span>
-			</header>
-			<div class="card-body">
-				<div class="row">
+    <div class="row">
+    <aside class="col-md-3">
+        <!--   SIDEBAR   -->
+        <ul class="list-group">
+            <a class="list-group-item active" href="#"> Dashboard </a>
+            <a class="list-group-item" href="#"> My Order </a>
+        </ul>
+        <br>
+        <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> 
+        <!--   SIDEBAR .//END   -->
+    </aside>
+    <main class="col-md-9">
+        <article class="card">
+            <header class="card-header">
+                <strong class="d-inline-block mr-3">Logged in as:</strong>
+                <span>{{ user.first_name }}</span>
+            </header>
+            <div class="card-body">
+                <div class="row">
 
-						<div class="col-md-6">
-							<div class="card" style="text-align:center;">
-							<div class="card-body">
-								<h5 class="card-title">Your Total Order</h5>
-								<h4>{{ cart_count }}</h4>
-								<a href="{% url 'cart' %}">View Orders</a>
-							</div>
-							</div>
-						</div>
+                        <div class="col-md-6">
+                            <div class="card" style="text-align:center;">
+                            <div class="card-body">
+                                <h5 class="card-title">Your Total Order</h5>
+                                <h4>{{ cart_count }}</h4>
+                                <a href="{% url 'cart' %}">View Orders</a>
+                            </div>
+                            </div>
+                        </div>
 
-						<div class="col-md-6">
-							<div class="card" style="text-align:center;">
-								<div class="card-body">
-									<img src="https://www.w3schools.com/w3images/avatar2.png" alt="profile pic" width="50" height="50" style="border-radius:50%;">
-									<p class="mb-lg-0">{{ user.email }}</p>
-									<p>{{ user.phone_number }}</p>
-								</div>
-							</div>
-						</div>
+                        <div class="col-md-6">
+                            <div class="card" style="text-align:center;">
+                                <div class="card-body">
+                                    <img src="https://www.w3schools.com/w3images/avatar2.png" alt="profile pic" width="50" height="50" style="border-radius:50%;">
+                                    <p class="mb-lg-0">{{ user.email }}</p>
+                                    <p>{{ user.phone_number }}</p>
+                                </div>
+                            </div>
+                        </div>
 
-				</div> <!-- row.// -->
-			</div> <!-- card-body .// -->
-		</article> <!-- order-group.// --> 
-	</main>
+                </div> <!-- row.// -->
+            </div> <!-- card-body .// -->
+        </article> <!-- order-group.// --> 
+    </main>
 </div> <!-- row.// -->
 </div>
 
+<!-- Add the chart code here -->
+<canvas id="orderChart" style="max-height: 400px;"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@1.2.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    console.log("Chart.js script is executing.");
+    
+    var ctx = document.getElementById('orderChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ order_months|safe }},
+            datasets: [{
+                label: 'Number of Orders',
+                data: {{ order_counts|safe }},
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'category'
+                },
+                y: {
+                    beginAtZero: true,
+                    precision: 0,
+                    stepSize: 1
+                }
+            }
+        }
+    });
+</script>
 
 </section>
 

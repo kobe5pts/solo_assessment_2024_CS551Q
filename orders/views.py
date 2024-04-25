@@ -88,6 +88,7 @@ def order_complete(request):
         subtotal = 0
         for item in ordered_products:
             subtotal += item.product_price * item.quantity
+            subtotal = round(subtotal, 2)  # Round to 2 decimal places
 
         # Delete cart items associated with the current user
         if request.user.is_authenticated:

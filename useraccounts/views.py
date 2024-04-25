@@ -99,7 +99,7 @@ def dashboard(request):
     # Check if the user is an admin
     if request.user.is_admin:
         # If the user is an admin, proceed with the existing logic
-        orders = Order.objects.filter(user_id=request.user.id, is_ordered=False)
+        orders = Order.objects.filter(user_id=request.user.id, is_ordered=True)
         orders_by_month = orders.annotate(order_month=TruncMonth('created_at')).values('order_month').annotate(count=Count('id')).order_by('order_month')
         months = [order['order_month'].strftime('%b %Y') for order in orders_by_month]
         counts = [order['count'] for order in orders_by_month]
@@ -110,7 +110,7 @@ def dashboard(request):
         }
     else:
         # If the user is not an admin, return the view for ordered orders
-        orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
+        orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=False)
         orders_count = orders.count()
         context = {
             'orders_count': orders_count,
