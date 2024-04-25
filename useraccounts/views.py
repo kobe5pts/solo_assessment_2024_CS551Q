@@ -7,6 +7,8 @@ from carts.models import Cart, CartItem
 from carts.views import _cart_id
 from django.contrib.auth import authenticate
 from orders.models import Order
+from django.db.models import Count
+from django.db.models.functions import TruncMonth
 
 # Create your views here.
 
@@ -89,14 +91,29 @@ def logout(request):
     messages.success(request, 'You are logged out.')
     return redirect('login')
 
-@login_required(login_url = 'login')
+@login_required(login_url='login')
 def dashboard(request):
     """
     View for user dashboard.
     """
-    orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
-    orders_count = orders.count()
-    context = {
-       'orders_count' : orders_count, 
-    }
-    return render(request, 'useraccounts/dashboard.html', context)    
+    # Check if the user is an admin
+    if request.user.is_admin:
+        # If the user is an admin, proceed with the existing logic
+        orders = Order.objects.filter(user_id=request.user.id, is_ordered=False)
+        orders_by_month = orders.annotate(order_month=TruncMonth('created_at')).values('order_month').annotate(count=Count('id')).order_by('order_month')
+        months = [order['order_month'].strftime('%b %Y') for order in orders_by_month]
+        counts = [order['count'] for order in orders_by_month]
+        context = {
+            'orders_count': orders.count(),
+            'order_months': months,
+            'order_counts': counts,
+        }
+    else:
+        # If the user is not an admin, return the view for ordered orders
+        orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
+        orders_count = orders.count()
+        context = {
+            'orders_count': orders_count,
+        }
+        
+    return render(request, 'useraccounts/dashboard.html', context)
