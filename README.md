@@ -33,7 +33,7 @@ The application is deployed on PythonAnyWhere at this site:  <https://samamao.py
          python3 manage.py runserver 0.0.0.0:8000 # Use Ctrl+C to stop the server.
          python3 manage.py runserver # on local machine
          ```
-   5. Launch the application at this address:    https://samuelsalami-falconside-8000.codio-box.uk/
+   5. Launch the application to your browser but change the port to  '8000'    
 
 ## Creating Superuser
    You can create an admin user to monitor the customers and orders made in the shop. 
@@ -42,9 +42,9 @@ The application is deployed on PythonAnyWhere at this site:  <https://samamao.py
 ```bash
    python3 manage.py createsuperuser
 ```
-   Launch the admin application at this address:    https://samuelsalami-falconside-8000.codio-box.uk/admin
+   Launch the admin application by adding   /admin   to the web homepage address launched in step 5 above.
 ## Creating a user
-   You create a user by signing up using the [Register](https://samuelsalami-falconside-8000.codio-box.uk/useraccounts/register/) button, however, such user would have to be activated by the superuser in the
+   You create a user by signing up using the [Register] button, however, such user would have to be activated by the superuser in the
    admin dashboard for now. Authentication for new user was not implemented in this project.
 ### Program Structure
 The program is composed of six Django applications: mobile_phones_shop for site basic settings, carts, category, orders, products_shop, and useraccounts applications for the website's detailed content.

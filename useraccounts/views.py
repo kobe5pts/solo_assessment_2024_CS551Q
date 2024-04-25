@@ -6,7 +6,6 @@ from django.contrib.auth.decorators import login_required
 from carts.models import Cart, CartItem
 from carts.views import _cart_id
 from django.contrib.auth import authenticate
-import requests
 from orders.models import Order
 
 # Create your views here.
