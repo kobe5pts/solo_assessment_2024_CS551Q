@@ -1,7 +1,6 @@
-# solo_assessment_2024_CS551Q
 # Modupe Mobile Phone Shop
 ## Overview
-This is a solo assessment course work by Samuel Amao for the course CSS551Q at the University of Aberdeen.
+This is a solo assessment for the course CSS551Q at the University of Aberdeen.
 The Modupe Mobile Phone Shops is a web application developed using Python with Django Framework, aimed at 
 simplifying the process of purchasing mobile phones. The goal is to provide users with an intuitive 
 platform where they can effortlessly browse, search for, and order mobile phones. Leveraging open-source data 
@@ -44,7 +43,7 @@ The application is deployed on PythonAnyWhere at this site:  <https://samamao.py
 ```
    Launch the admin application by adding   /admin   to the web homepage address launched in step 5 above.
 ## Creating a user
-   You create a user by signing up using the [Register] button, however, such user would have to be activated by the superuser in the
+   You create a user by signing up using the [Register] button, however, such user MUST to be activated by the superuser in the
    admin dashboard for now. Authentication for new user was not implemented in this project.
 ### Program Structure
 The program is composed of six Django applications: mobile_phones_shop for site basic settings, carts, category, orders, products_shop, and useraccounts applications for the website's detailed content.
